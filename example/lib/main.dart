@@ -1,4 +1,5 @@
-import 'package:api_widget_example/models/comment.dart';
+import 'package:api_widget_example/core/models/comment.dart';
+import 'package:api_widget_example/core/services/services.dart';
 import 'package:flutter/material.dart';
 import 'package:api_widget/api_widget.dart';
 
@@ -23,7 +24,7 @@ class _MyAppState extends State<MyApp> {
         ),
         body: Center(
           child: APIContainerWidget<List<Comment>, Comment>(
-            url: "https://jsonplaceholder.typicode.com/comments",
+            url: Services.commentsAPI,
             method: HttpMethod.GET,
             parser: Comment.fromJson,
             builder: (context, data) {
