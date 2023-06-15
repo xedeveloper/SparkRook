@@ -19,27 +19,22 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        appBar: AppBar(
-          title: const Text('API Example'),
-        ),
-        body: Center(
-          child: APIContainerWidget<List<Comment>, Comment>(
-            url: Services.commentsAPI,
-            method: HttpMethod.GET,
-            parser: Comment.fromJson,
-            builder: (context, data) {
-              return ListView.builder(
-                itemCount: data?.length ?? 0,
-                itemBuilder: (_, i) {
-                  return Column(
-                    children: [
-                      Text(data?[i].name ?? ""),
-                    ],
-                  );
-                },
-              );
-            },
-          ),
+        body: APIContainerWidget<List<Comment>, Comment>(
+          url: Services.commentsAPI,
+          method: HttpMethod.GET,
+          parser: Comment.fromJson,
+          builder: (context, data) {
+            return ListView.builder(
+              itemCount: data?.length ?? 0,
+              itemBuilder: (_, i) {
+                return Column(
+                  children: [
+                    Text(data?[i].name ?? ""),
+                  ],
+                );
+              },
+            );
+          },
         ),
       ),
     );
