@@ -3,7 +3,7 @@
 ## Title
 <!--- Provide issue title from the issue create on Github --->
 
-## Descrption
+## Description
 <!--- Provide description of the issue for the selected. --->
 
 **Request Link:** [Issue-XX](https://github.com/xedeveloper/api_widget/issues/XX)
