@@ -1,18 +1,46 @@
-# api_widget
+# API Widget Builder
 
-A new Flutter plugin project.
+## About
 
-## Getting Started
+A flutter widget to replace all your API call logic. Want to call an API on the go? Just embed this widget in your project.
 
-This project is a starting point for a Flutter
-[plug-in package](https://flutter.dev/developing-packages/),
-a specialized package that includes platform-specific implementation code for
-Android and/or iOS.
+### Installing
 
-For help getting started with Flutter development, view the
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
 
-The plugin project was generated without specifying the `--platforms` flag, no platforms are currently supported.
-To add platforms, run `flutter create -t plugin --platforms <platforms> .` in this directory.
-You can also find a detailed instruction on how to add platforms in the `pubspec.yaml` at https://flutter.dev/docs/development/packages-and-plugins/developing-packages#plugin-platforms.
+To use this package in your Flutter project add this to your `pubspec.yaml`
+
+```yaml
+dependencies:
+  api_widget:
+    git:
+      url: https://github.com/xedeveloper/api_widget.git
+```
+
+### Usage
+
+```dart
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      home: Scaffold(
+        body: APIContainerWidget<List<Comment>, Comment>(
+          url: Services.commentsAPI,
+          method: HttpMethod.GET,
+          parser: Comment.fromJson,
+          builder: (context, data) {
+            return ListView.builder(
+              itemCount: data?.length ?? 0,
+              itemBuilder: (_, i) {
+                return Column(
+                  children: [
+                    Text(data?[i].name ?? ""),
+                  ],
+                );
+              },
+            );
+          },
+        ),
+      ),
+    );
+  }
+```
