@@ -23,9 +23,10 @@ jobs:
         with:
           java-version: ${{ env.java_version }}
       
-      - uses: subosito/flutter-actions@v1
+      - uses: subosito/flutter-action@v2
         with: 
           flutter-version: ${{ env.flutter_version }}
+          channel: 'stable'
 
       - name: 🚀 Get Pub Dependencies
         run: flutter pub get
