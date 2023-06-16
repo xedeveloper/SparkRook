@@ -2,7 +2,9 @@ import 'dart:async';
 
 import 'package:api_widget/src/core/errors/failure.dart';
 import 'package:api_widget/src/core/http_connection_state.dart';
-import 'package:api_widget/src/dio_client.dart';
+import 'package:api_widget/src/core/request_option_stream.dart';
+import 'package:api_widget/src/network_helper.dart';
+
 import 'package:api_widget/src/src_export.dart';
 import 'package:dio/dio.dart';
 
@@ -81,15 +83,6 @@ class HttpBloc<T> {
   }
 
   RequestOptions _setStreamType<V>(RequestOptions requestOptions) {
-    if (V != dynamic &&
-        !(requestOptions.responseType == ResponseType.bytes ||
-            requestOptions.responseType == ResponseType.stream)) {
-      if (V == String) {
-        requestOptions.responseType == ResponseType.plain;
-      } else {
-        requestOptions.responseType == ResponseType.json;
-      }
-    }
-    return requestOptions;
+    return RequestOptionsStream.setStreamType(requestOptions);
   }
 }
