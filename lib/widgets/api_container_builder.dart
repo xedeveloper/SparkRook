@@ -13,6 +13,7 @@ class APIContainerWidget<T, P> extends StatelessWidget {
   final String url;
 
   final HttpBloc<T> _httpBloc = HttpBloc<T>();
+
   APIContainerWidget({
     super.key,
     required this.builder,
