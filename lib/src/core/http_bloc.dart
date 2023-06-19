@@ -1,54 +1,85 @@
 import 'dart:async';
 
+import 'package:api_widget/src/core/errors/failure.dart';
+import 'package:api_widget/src/core/http_connection_state.dart';
 import 'package:api_widget/src/core/request_option_stream.dart';
-import 'package:api_widget/src/network_helper.dart';
 import 'package:api_widget/src/src_export.dart';
 import 'package:dio/dio.dart';
 
 class HttpBloc<T> {
-  final StreamController<T> _requestStreamController = StreamController<T>();
+  final StreamController<HttpConnectionState<T>> _requestStreamController =
+      StreamController<HttpConnectionState<T>>();
 
-  final Dio _dio = NetworkHelper.getDioClient();
-
-  Stream<T> get httpStream {
+  Stream<HttpConnectionState<T>> get httpStream {
     return _requestStreamController.stream;
+  }
+
+  StreamSink<HttpConnectionState<T>> get _httpSink {
+    return _requestStreamController.sink;
   }
 
   void initiateHttpRequest<P>({
     required HttpMethod method,
     required String url,
+    required Dio dio,
     dynamic Function(Map<String, dynamic>)? parser,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? queryParameters,
     Map<String, dynamic>? data,
     Map<String, dynamic>? extra,
   }) async {
-    final _result = await _dio.fetch<dynamic>(
-      _setStreamType<T>(
-        Options(
-          method: method.name,
-          headers: headers,
-          extra: extra,
-          responseType: ResponseType.json,
-        ).compose(
-          _dio.options,
-          url,
-          queryParameters: queryParameters,
-          data: data,
+    _httpSink.add(HttpConnectionState.loading());
+    Response<dynamic>? _result;
+    try {
+      _result = await dio.fetch<dynamic>(
+        _setStreamType<T>(
+          Options(
+            method: method.name,
+            headers: headers,
+            extra: extra,
+            responseType: ResponseType.json,
+          ).compose(
+            dio.options,
+            url,
+            queryParameters: queryParameters,
+            data: data,
+          ),
         ),
-      ),
-    );
-    var value = _result.data;
-    if (parser != null) {
-      if (value is List) {
-        var mappedValue = value.map((e) => parser(e) as P).toList();
-        _requestStreamController.sink.add(mappedValue as T);
+      );
+    } catch (error) {
+      _httpSink.add(
+        HttpConnectionState.errorReceived(
+          HttpFailure(
+            Exception((error as DioException).message),
+          ),
+        ),
+      );
+    }
+    if (_result != null) {
+      var value = _result.data;
+      if (parser != null) {
+        if (value is List) {
+          var mappedValue = value.map((e) => parser(e) as P).toList();
+          _httpSink.add(
+            HttpConnectionState.dataReceived(mappedValue as T),
+          );
+        } else {
+          var parsedValue = parser(value);
+          _httpSink.add(
+            HttpConnectionState.dataReceived(parsedValue),
+          );
+        }
       } else {
-        var parsedValue = parser(value);
-        _requestStreamController.sink.add(parsedValue);
+        if (value.runtimeType != T) {
+          _httpSink.add(HttpConnectionState.errorReceived(HttpFailure(
+            Exception(
+              "Error: The current value does not match with expected value. Please provide a parser",
+            ),
+          )));
+        } else {
+          _httpSink.add(HttpConnectionState.dataReceived(value));
+        }
       }
-    } else {
-      _requestStreamController.sink.add(value);
     }
   }
 

@@ -33,3 +33,14 @@ class MockComments {
         "body": body,
       };
 }
+
+class MockDataGenerator {
+  static List<MockComments> generateMocks() {
+    return [
+      MockComments(
+          postId: 1, id: 1, name: "name", email: "email", body: "body"),
+      MockComments(
+          postId: 2, id: 2, name: "name", email: "email", body: "body"),
+    ];
+  }
+}
