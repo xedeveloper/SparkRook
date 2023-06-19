@@ -1,4 +1,5 @@
 import 'package:api_widget/src/core/http_bloc.dart';
+import 'package:api_widget/src/core/http_connection_state.dart';
 import 'package:api_widget/src/src_export.dart';
 import 'package:flutter/widgets.dart';
 
@@ -37,12 +38,13 @@ class APIContainerWidget<T, P> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<T>(
+    return StreamBuilder<HttpConnectionState<T>>(
+      initialData: HttpConnectionState.loading(),
       stream: _httpBloc.httpStream,
       builder: (context, snapshot) {
         return builder(
           context,
-          snapshot.data,
+          snapshot.data!,
         );
       },
     );
