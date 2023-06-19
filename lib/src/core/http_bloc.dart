@@ -60,10 +60,14 @@ class HttpBloc<T> {
       if (parser != null) {
         if (value is List) {
           var mappedValue = value.map((e) => parser(e) as P).toList();
-          _httpSink.add(HttpConnectionState.dataReceived(mappedValue as T));
+          _httpSink.add(
+            HttpConnectionState.dataReceived(mappedValue as T),
+          );
         } else {
           var parsedValue = parser(value);
-          _httpSink.add(HttpConnectionState.dataReceived(parsedValue));
+          _httpSink.add(
+            HttpConnectionState.dataReceived(parsedValue),
+          );
         }
       } else {
         if (value.runtimeType != T) {
