@@ -43,4 +43,3 @@ class MockDataGenerator {
           postId: 2, id: 2, name: "name", email: "email", body: "body"),
     ];
   }
-}
