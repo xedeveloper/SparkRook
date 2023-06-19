@@ -1,6 +1,8 @@
 import 'package:api_widget/src/core/http_bloc.dart';
 import 'package:api_widget/src/core/http_connection_state.dart';
+import 'package:api_widget/src/network_helper.dart';
 import 'package:api_widget/src/src_export.dart';
+import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 
 class APIContainerWidget<T, P> extends StatelessWidget {
@@ -12,7 +14,7 @@ class APIContainerWidget<T, P> extends StatelessWidget {
   final HttpMethod method;
   final dynamic Function(Map<String, dynamic>)? parser;
   final String url;
-
+  final Dio _dio = NetworkHelper.getDioClient();
   final HttpBloc<T> _httpBloc = HttpBloc<T>();
 
   APIContainerWidget({
@@ -29,6 +31,7 @@ class APIContainerWidget<T, P> extends StatelessWidget {
     _httpBloc.initiateHttpRequest<P>(
       method: method,
       url: url,
+      dio: _dio,
       queryParameters: queryParameters,
       data: data,
       extra: extra,

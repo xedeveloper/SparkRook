@@ -3,15 +3,12 @@ import 'dart:async';
 import 'package:api_widget/src/core/errors/failure.dart';
 import 'package:api_widget/src/core/http_connection_state.dart';
 import 'package:api_widget/src/core/request_option_stream.dart';
-import 'package:api_widget/src/network_helper.dart';
 import 'package:api_widget/src/src_export.dart';
 import 'package:dio/dio.dart';
 
 class HttpBloc<T> {
   final StreamController<HttpConnectionState<T>> _requestStreamController =
       StreamController<HttpConnectionState<T>>();
-
-  final Dio _dio = NetworkHelper.getDioClient();
 
   Stream<HttpConnectionState<T>> get httpStream {
     return _requestStreamController.stream;
@@ -24,6 +21,7 @@ class HttpBloc<T> {
   void initiateHttpRequest<P>({
     required HttpMethod method,
     required String url,
+    required Dio dio,
     dynamic Function(Map<String, dynamic>)? parser,
     Map<String, dynamic>? headers,
     Map<String, dynamic>? queryParameters,
@@ -33,7 +31,7 @@ class HttpBloc<T> {
     _httpSink.add(HttpConnectionState.loading());
     Response<dynamic>? _result;
     try {
-      _result = await _dio.fetch<dynamic>(
+      _result = await dio.fetch<dynamic>(
         _setStreamType<T>(
           Options(
             method: method.name,
@@ -41,7 +39,7 @@ class HttpBloc<T> {
             extra: extra,
             responseType: ResponseType.json,
           ).compose(
-            _dio.options,
+            dio.options,
             url,
             queryParameters: queryParameters,
             data: data,
