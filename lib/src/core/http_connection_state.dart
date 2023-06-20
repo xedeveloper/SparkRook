@@ -1,4 +1,4 @@
-import 'package:api_widget/src/core/errors/failure.dart';
+import 'package:rebuilder/src/core/errors/failure.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 part 'http_connection_state.freezed.dart';

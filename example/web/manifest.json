@@ -1,11 +1,11 @@
 {
-    "name": "api_widget_example",
-    "short_name": "api_widget_example",
+    "name": "rebuilder_example",
+    "short_name": "rebuilder_example",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Demonstrates how to use the api_widget plugin.",
+    "description": "Demonstrates how to use the rebuilder plugin.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

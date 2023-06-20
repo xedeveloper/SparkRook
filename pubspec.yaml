@@ -1,6 +1,6 @@
-name: api_widget
-description: A new Flutter plugin project.
-version: 0.0.1
+name: rebuilder
+description: A simple flutter widget to handle your APIs
+version: 1.0.0
 homepage:
 
 environment:
