@@ -1,6 +1,6 @@
-import 'package:api_widget/src/core/http_bloc.dart';
-import 'package:api_widget/src/core/http_connection_state.dart';
-import 'package:api_widget/src/src_export.dart';
+import 'package:rebuilder/src/core/http_bloc.dart';
+import 'package:rebuilder/src/core/http_connection_state.dart';
+import 'package:rebuilder/src/src_export.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 

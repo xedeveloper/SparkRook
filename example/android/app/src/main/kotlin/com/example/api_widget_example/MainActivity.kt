@@ -1,4 +1,4 @@
-package com.example.api_widget_example
+package com.example.rebuilder_example
 
 import io.flutter.embedding.android.FlutterActivity
 

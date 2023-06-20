@@ -1,11 +1,11 @@
-import 'package:api_widget/src/core/http_bloc.dart';
-import 'package:api_widget/src/core/http_connection_state.dart';
-import 'package:api_widget/src/network_helper.dart';
-import 'package:api_widget/src/src_export.dart';
+import 'package:rebuilder/src/core/http_bloc.dart';
+import 'package:rebuilder/src/core/http_connection_state.dart';
+import 'package:rebuilder/src/network_helper.dart';
+import 'package:rebuilder/src/src_export.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 
-class APIContainerWidget<T, P> extends StatelessWidget {
+class RebuilderWidget<T, P> extends StatelessWidget {
   final AsyncDataBuilder<T> builder;
   final Map<String, dynamic>? queryParameters;
   final Map<String, dynamic>? headers;
@@ -17,7 +17,7 @@ class APIContainerWidget<T, P> extends StatelessWidget {
   final Dio _dio = NetworkHelper.getDioClient();
   final HttpBloc<T> _httpBloc = HttpBloc<T>();
 
-  APIContainerWidget({
+  RebuilderWidget({
     super.key,
     required this.builder,
     required this.url,

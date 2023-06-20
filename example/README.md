@@ -1,6 +1,6 @@
-# api_widget_example
+# rebuilder_example
 
-Demonstrates how to use the api_widget plugin.
+Demonstrates how to use the rebuilder plugin.
 
 ## Getting Started
 

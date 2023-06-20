@@ -1,4 +1,4 @@
-group 'com.example.api_widget'
+group 'com.example.rebuilder'
 version '1.0-SNAPSHOT'
 
 buildscript {

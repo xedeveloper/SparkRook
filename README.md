@@ -1,4 +1,6 @@
-# API Widget Builder
+# ReBuilder
+
+![Title Image](Title.png)
 
 ## About
 
@@ -12,9 +14,9 @@ To use this package in your Flutter project add this to your `pubspec.yaml`
 
 ```yaml
 dependencies:
-  api_widget:
+  rebuilder:
     git:
-      url: https://github.com/xedeveloper/api_widget.git
+      url: https://github.com/xedeveloper/rebuilder.git
 ```
 
 ### Usage
@@ -23,7 +25,7 @@ dependencies:
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: APIContainerWidget<List<Comment>, Comment>(
+        body: RebuilderWidget<List<Comment>, Comment>(
           url: Services.commentsAPI,
           method: HttpMethod.GET,
           parser: Comment.fromJson,

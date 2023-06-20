@@ -1,7 +1,7 @@
-import 'package:api_widget_example/core/models/comment.dart';
-import 'package:api_widget_example/core/services/services.dart';
+import 'package:rebuilder_example/core/models/comment.dart';
+import 'package:rebuilder_example/core/services/services.dart';
 import 'package:flutter/material.dart';
-import 'package:api_widget/api_widget.dart';
+import 'package:rebuilder/rebuilder.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,7 +19,7 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: APIContainerWidget<List<Comment>, Comment>(
+        body: RebuilderWidget<List<Comment>, Comment>(
           url: Services.commentsAPI,
           method: HttpMethod.GET,
           parser: Comment.fromJson,

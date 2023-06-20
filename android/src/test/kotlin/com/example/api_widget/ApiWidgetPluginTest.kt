@@ -1,4 +1,4 @@
-package com.example.api_widget
+package com.example.rebuilder
 
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel

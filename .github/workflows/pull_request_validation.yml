@@ -4,7 +4,7 @@ on:
   pull_request:
 
 env:
-  project: 'api_widget'
+  project: 'Rebuilder'
   flutter_version: '3.10.4'
   java_version: '12.x'
 

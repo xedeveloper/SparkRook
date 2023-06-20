@@ -1,4 +1,4 @@
-package com.example.api_widget
+package com.example.rebuilder
 
 import androidx.annotation.NonNull
 
@@ -17,7 +17,7 @@ class ApiWidgetPlugin: FlutterPlugin, MethodCallHandler {
   private lateinit var channel : MethodChannel
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "api_widget")
+    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "rebuilder")
     channel.setMethodCallHandler(this)
   }
 
