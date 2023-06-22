@@ -1,11 +1,11 @@
-import 'package:rebuilder/src/core/http_bloc.dart';
+import 'package:sparkrook/src/core/spark_bloc.dart';
 
 import '../../mock_data/dio_mock_response_adapter.dart';
 import '../../mock_data/mock_models.dart';
 
 class HttpBlocTestData {
-  static HttpBloc<MockModelPrimary> mockModelBlocSuccess =
-      HttpBloc<MockModelPrimary>();
+  static SparkBloc<MockModelPrimary> mockModelBlocSuccess =
+      SparkBloc<MockModelPrimary>();
   static DioMockResponseAdapter mockAdapterSuccess = DioMockResponseAdapter(
     MockAdapterInterceptor(
       RequestType.GET,

@@ -6,7 +6,7 @@
 ## Description
 <!--- Provide description of the issue for the selected. --->
 
-**Request Link:** [Issue-XX](https://github.com/xedeveloper/Rebuilder/issues/XX)
+**Request Link:** [Issue-XX](https://github.com/xedeveloper/SparkRook/issues/XX)
 
 ## How To Test?
 

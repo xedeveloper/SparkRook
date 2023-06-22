@@ -1,4 +1,4 @@
-package com.example.rebuilder_example
+package com.example.sparkrook_example
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,12 +1,12 @@
-import 'package:rebuilder/src/core/http_bloc.dart';
-import 'package:rebuilder/src/core/http_connection_state.dart';
-import 'package:rebuilder/src/network_helper.dart';
-import 'package:rebuilder/src/src_export.dart';
+import 'package:sparkrook/src/core/spark_bloc.dart';
+import 'package:sparkrook/src/core/rook_state.dart';
+import 'package:sparkrook/src/network_helper.dart';
+import 'package:sparkrook/src/src_export.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/widgets.dart';
 
-class RebuilderWidget<T, P> extends StatelessWidget {
-  final AsyncDataBuilder<T> builder;
+class SparkRookWidget<T, P> extends StatelessWidget {
+  final AsyncSparkBuilder<T> builder;
   final Map<String, dynamic>? queryParameters;
   final Map<String, dynamic>? headers;
   final Map<String, dynamic>? data;
@@ -15,9 +15,9 @@ class RebuilderWidget<T, P> extends StatelessWidget {
   final dynamic Function(Map<String, dynamic>)? parser;
   final String url;
   final Dio _dio = NetworkHelper.getDioClient();
-  final HttpBloc<T> _httpBloc = HttpBloc<T>();
+  final SparkBloc<T> _httpBloc = SparkBloc<T>();
 
-  RebuilderWidget({
+  SparkRookWidget({
     super.key,
     required this.builder,
     required this.url,
@@ -42,8 +42,8 @@ class RebuilderWidget<T, P> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return StreamBuilder<HttpConnectionState<T>>(
-      initialData: HttpConnectionState.loading(),
+    return StreamBuilder<RookState<T>>(
+      initialData: RookState.loading(),
       stream: _httpBloc.httpStream,
       builder: (context, snapshot) {
         return builder(

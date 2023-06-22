@@ -1,6 +1,6 @@
-# rebuilder_example
+# sparkrook_example
 
-Demonstrates how to use the rebuilder plugin.
+Demonstrates how to use the sparkrook plugin.
 
 ## Getting Started
 

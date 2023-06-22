@@ -1,4 +1,4 @@
-package com.example.rebuilder
+package com.example.sparkrook
 
 import androidx.annotation.NonNull
 
@@ -17,7 +17,7 @@ class ApiWidgetPlugin: FlutterPlugin, MethodCallHandler {
   private lateinit var channel : MethodChannel
 
   override fun onAttachedToEngine(@NonNull flutterPluginBinding: FlutterPlugin.FlutterPluginBinding) {
-    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "rebuilder")
+    channel = MethodChannel(flutterPluginBinding.binaryMessenger, "sparkrook")
     channel.setMethodCallHandler(this)
   }
 

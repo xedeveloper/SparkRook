@@ -1,20 +1,20 @@
 import 'dart:async';
 
-import 'package:rebuilder/src/core/errors/failure.dart';
-import 'package:rebuilder/src/core/http_connection_state.dart';
-import 'package:rebuilder/src/core/request_option_stream.dart';
-import 'package:rebuilder/src/src_export.dart';
+import 'package:sparkrook/src/core/errors/failure.dart';
+import 'package:sparkrook/src/core/rook_state.dart';
+import 'package:sparkrook/src/core/request_option_stream.dart';
+import 'package:sparkrook/src/src_export.dart';
 import 'package:dio/dio.dart';
 
-class HttpBloc<T> {
-  final StreamController<HttpConnectionState<T>> _requestStreamController =
-      StreamController<HttpConnectionState<T>>();
+class SparkBloc<T> {
+  final StreamController<RookState<T>> _requestStreamController =
+      StreamController<RookState<T>>();
 
-  Stream<HttpConnectionState<T>> get httpStream {
+  Stream<RookState<T>> get httpStream {
     return _requestStreamController.stream;
   }
 
-  StreamSink<HttpConnectionState<T>> get _httpSink {
+  StreamSink<RookState<T>> get _httpSink {
     return _requestStreamController.sink;
   }
 
@@ -28,7 +28,7 @@ class HttpBloc<T> {
     Map<String, dynamic>? data,
     Map<String, dynamic>? extra,
   }) async {
-    _httpSink.add(HttpConnectionState.loading());
+    _httpSink.add(RookState.loading());
     Response<dynamic>? _result;
     try {
       _result = await dio.fetch<dynamic>(
@@ -48,7 +48,7 @@ class HttpBloc<T> {
       );
     } catch (error) {
       _httpSink.add(
-        HttpConnectionState.errorReceived(
+        RookState.errorReceived(
           HttpFailure(
             Exception((error as DioException).message),
           ),
@@ -61,23 +61,23 @@ class HttpBloc<T> {
         if (value is List) {
           var mappedValue = value.map((e) => parser(e) as P).toList();
           _httpSink.add(
-            HttpConnectionState.dataReceived(mappedValue as T),
+            RookState.dataReceived(mappedValue as T),
           );
         } else {
           var parsedValue = parser(value);
           _httpSink.add(
-            HttpConnectionState.dataReceived(parsedValue),
+            RookState.dataReceived(parsedValue),
           );
         }
       } else {
         if (value.runtimeType != T) {
-          _httpSink.add(HttpConnectionState.errorReceived(HttpFailure(
+          _httpSink.add(RookState.errorReceived(HttpFailure(
             Exception(
               "Error: The current value does not match with expected value. Please provide a parser",
             ),
           )));
         } else {
-          _httpSink.add(HttpConnectionState.dataReceived(value));
+          _httpSink.add(RookState.dataReceived(value));
         }
       }
     }
