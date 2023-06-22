@@ -1,7 +1,7 @@
-import 'package:rebuilder/src/core/http_connection_state.dart';
+import 'package:sparkrook/src/core/rook_state.dart';
 import 'package:flutter/widgets.dart';
 
-typedef AsyncDataBuilder<T> = Widget Function(
+typedef AsyncSparkBuilder<T> = Widget Function(
   BuildContext context,
-  HttpConnectionState<T>,
+  RookState<T>,
 );

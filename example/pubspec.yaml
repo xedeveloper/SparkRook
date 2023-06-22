@@ -1,5 +1,5 @@
-name: rebuilder_example
-description: Demonstrates how to use the rebuilder plugin.
+name: sparkrook_example
+description: Demonstrates how to use the sparkrook plugin.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
 
-  rebuilder:
+  sparkrook:
     path: ../
   cupertino_icons: ^1.0.2
 

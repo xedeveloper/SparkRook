@@ -1,4 +1,4 @@
-# ReBuilder
+# SparkRook
 
 ![Title Image](Title.png)
 
@@ -14,9 +14,9 @@ To use this package in your Flutter project add this to your `pubspec.yaml`
 
 ```yaml
 dependencies:
-  rebuilder:
+  sparkrook:
     git:
-      url: https://github.com/xedeveloper/rebuilder.git
+      url: https://github.com/xedeveloper/sparkrook.git
 ```
 
 ### Usage
@@ -25,7 +25,7 @@ dependencies:
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: RebuilderWidget<List<Comment>, Comment>(
+        body: SparkRookWidget<List<Comment>, Comment>(
           url: Services.commentsAPI,
           method: HttpMethod.GET,
           parser: Comment.fromJson,

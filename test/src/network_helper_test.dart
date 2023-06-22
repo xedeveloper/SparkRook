@@ -1,4 +1,4 @@
-import 'package:rebuilder/src/network_helper.dart';
+import 'package:sparkrook/src/network_helper.dart';
 import 'package:flutter_test/flutter_test.dart';
 
 void main() {

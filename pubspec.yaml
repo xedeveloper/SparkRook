@@ -1,7 +1,7 @@
-name: rebuilder
+name: sparkrook
 description: A simple flutter widget to handle your APIs
 version: 1.0.0
-repository: https://github.com/xedeveloper/Rebuilder
+repository: https://github.com/xedeveloper/SparkRook
 
 environment:
   sdk: '>=3.0.3 <4.0.0'

@@ -1,6 +1,6 @@
-import 'package:rebuilder/src/core/http_bloc.dart';
-import 'package:rebuilder/src/core/http_connection_state.dart';
-import 'package:rebuilder/src/src_export.dart';
+import 'package:sparkrook/src/core/spark_bloc.dart';
+import 'package:sparkrook/src/core/rook_state.dart';
+import 'package:sparkrook/src/src_export.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_test/flutter_test.dart';
 
@@ -9,19 +9,19 @@ import '../../mock_data/mock_models.dart';
 import 'http_bloc_test_data.dart';
 
 void main() {
-  final HttpBloc<List<MockComments>> mockCommentBloc =
-      HttpBloc<List<MockComments>>();
-  final HttpBloc<List<MockComments>> mockCommentBlocFailure =
-      HttpBloc<List<MockComments>>();
+  final SparkBloc<List<MockComments>> mockCommentBloc =
+      SparkBloc<List<MockComments>>();
+  final SparkBloc<List<MockComments>> mockCommentBlocFailure =
+      SparkBloc<List<MockComments>>();
 
   group(
-    'group: HttpBloc data type checks',
+    'group: SparkBloc data type checks',
     () {
       test(
         'test: the bloc runtimeType should be the one declared',
         () {
           expect(HttpBlocTestData.mockModelBlocSuccess.runtimeType,
-              HttpBloc<MockModelPrimary>);
+              SparkBloc<MockModelPrimary>);
         },
       );
       test(
@@ -30,7 +30,7 @@ void main() {
           expect(
               HttpBlocTestData.mockModelBlocSuccess.httpStream.runtimeType
                   .toString(),
-              "_ControllerStream<HttpConnectionState<MockModelPrimary>>");
+              "_ControllerStream<RookState<MockModelPrimary>>");
         },
       );
     },
@@ -50,7 +50,7 @@ void main() {
         },
       );
       test(
-        'should emit instance of [HttpConnectionState.loading(),HttpConnectionState.dataReceived([])]',
+        'should emit instance of [RookState.loading(),RookState.dataReceived([])]',
         () {
           mockCommentBloc.initiateHttpRequest<MockComments>(
             method: HttpMethod.GET,
@@ -62,8 +62,8 @@ void main() {
             mockCommentBloc.httpStream,
             emitsInOrder(
               [
-                HttpConnectionState<List<MockComments>>.loading(),
-                HttpConnectionState<List<MockComments>>.dataReceived([])
+                RookState<List<MockComments>>.loading(),
+                RookState<List<MockComments>>.dataReceived([])
               ],
             ),
           );
@@ -99,8 +99,8 @@ void main() {
             mockCommentBlocFailure.httpStream,
             emitsInOrder(
               [
-                HttpConnectionState<List<MockComments>>.loading(),
-                isInstanceOf<HttpConnectionState<List<MockComments>>>(),
+                RookState<List<MockComments>>.loading(),
+                isInstanceOf<RookState<List<MockComments>>>(),
               ],
             ),
           );

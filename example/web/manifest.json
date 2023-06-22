@@ -1,11 +1,11 @@
 {
-    "name": "rebuilder_example",
-    "short_name": "rebuilder_example",
+    "name": "sparkrook_example",
+    "short_name": "sparkrook_example",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",
     "theme_color": "#0175C2",
-    "description": "Demonstrates how to use the rebuilder plugin.",
+    "description": "Demonstrates how to use the sparkrook plugin.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

@@ -1,4 +1,4 @@
-package com.example.rebuilder
+package com.example.sparkrook
 
 import io.flutter.plugin.common.MethodCall
 import io.flutter.plugin.common.MethodChannel
