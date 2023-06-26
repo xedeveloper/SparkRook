@@ -1,4 +1,4 @@
-import 'package:sparkrook/src/core/spark_bloc.dart';
+import 'package:sparkrook/src/core/rook_handler.dart';
 import 'package:sparkrook/src/core/rook_state.dart';
 import 'package:sparkrook/src/src_export.dart';
 import 'package:dio/dio.dart';
@@ -6,30 +6,29 @@ import 'package:flutter_test/flutter_test.dart';
 
 import '../../mock_data/mock_comments.dart';
 import '../../mock_data/mock_models.dart';
-import 'http_bloc_test_data.dart';
+import 'rook_handler_test_data.dart';
 
 void main() {
-  final SparkBloc<List<MockComments>> mockCommentBloc =
-      SparkBloc<List<MockComments>>();
-  final SparkBloc<List<MockComments>> mockCommentBlocFailure =
-      SparkBloc<List<MockComments>>();
+  final RookHandler<List<MockComments>> mockCommentBloc =
+      RookHandler<List<MockComments>>();
+  final RookHandler<List<MockComments>> mockCommentBlocFailure =
+      RookHandler<List<MockComments>>();
 
   group(
-    'group: SparkBloc data type checks',
+    'group: RookHandler data type checks',
     () {
       test(
         'test: the bloc runtimeType should be the one declared',
         () {
           expect(HttpBlocTestData.mockModelBlocSuccess.runtimeType,
-              SparkBloc<MockModelPrimary>);
+              RookHandler<MockModelPrimary>);
         },
       );
       test(
         'test: the stream runtimeType should be the one declared with Bloc',
         () {
           expect(
-              HttpBlocTestData.mockModelBlocSuccess.httpStream.runtimeType
-                  .toString(),
+              HttpBlocTestData.mockModelBlocSuccess.rook.runtimeType.toString(),
               "_ControllerStream<RookState<MockModelPrimary>>");
         },
       );
@@ -59,7 +58,7 @@ void main() {
             parser: MockComments.fromJson,
           );
           expectLater(
-            mockCommentBloc.httpStream,
+            mockCommentBloc.rook,
             emitsInOrder(
               [
                 RookState<List<MockComments>>.loading(),
@@ -96,7 +95,7 @@ void main() {
           );
 
           expectLater(
-            mockCommentBlocFailure.httpStream,
+            mockCommentBlocFailure.rook,
             emitsInOrder(
               [
                 RookState<List<MockComments>>.loading(),
