@@ -6,18 +6,45 @@ import 'package:sparkrook/src/core/request_option_stream.dart';
 import 'package:sparkrook/src/src_export.dart';
 import 'package:dio/dio.dart';
 
-class SparkBloc<T> {
+/// Creates a [RookHandler] with type [T] which handles the state of API
+/// [RookHandler] will manage the stream, dio client & the parsing logic
+/// of the API
+class RookHandler<T> {
+  /// Creates a [StreamController] which takes RookState as type.
+  ///
+  /// StreamController will handle the stream for the [SparkRookWidget]
   final StreamController<RookState<T>> _requestStreamController =
       StreamController<RookState<T>>();
 
-  Stream<RookState<T>> get httpStream {
+  /// Creates a Stream with [RookState] as data stream.
+  /// [RookState] will notify the process of stream
+  Stream<RookState<T>> get rook {
     return _requestStreamController.stream;
   }
 
+  /// Creates a [StreamSink] with [RookState] as data
+  /// outputs of [RookState] process will get added using this
   StreamSink<RookState<T>> get _httpSink {
     return _requestStreamController.sink;
   }
 
+  /// Initiates the HTTP request from [SparkRookWidget].
+  ///
+  /// * [method] : HTTP method like GET, POST, DELETE, etc required.
+  /// * [url]: URL is required to initiate the API call
+  /// * [dio]: Dio client will handle the fetching logic of the call
+  ///
+  /// [parser] will handle the parsing logic. Parser is required for
+  /// complex data types expected from response
+  ///
+  /// [headers] (optional) headers data if required to make an API call
+  ///
+  /// [queryParameters] (optional) additional query parameters if required
+  /// for the API call
+  ///
+  /// [data] (optional) additional data if required for API call
+  ///
+  /// [extra] (optional) extra data options if required for API call.
   void initiateHttpRequest<P>({
     required HttpMethod method,
     required String url,
@@ -83,7 +110,13 @@ class SparkBloc<T> {
     }
   }
 
+  /// Get [RequestOptions] to set the streamType for dio
   RequestOptions _setStreamType<V>(RequestOptions requestOptions) {
     return RequestOptionsStream.setStreamType(requestOptions);
+  }
+
+  /// Disposing [StreamController] afeter usage
+  void dispose() {
+    _requestStreamController.close();
   }
 }

@@ -1,6 +1,6 @@
 name: sparkrook
-description: A simple flutter widget to handle your APIs
-version: 1.0.0
+description: One stop solution to handle the API calls in Flutter project. It simplifies development for Network calls. 
+version: 1.0.2
 repository: https://github.com/xedeveloper/SparkRook
 
 environment:

@@ -1,6 +1,6 @@
 # SparkRook
 
-![Title Image](Title.png)
+![Title](https://raw.githubusercontent.com/xedeveloper/SparkRook/develop/Title.png)
 
 ## About
 
@@ -14,9 +14,7 @@ To use this package in your Flutter project add this to your `pubspec.yaml`
 
 ```yaml
 dependencies:
-  sparkrook:
-    git:
-      url: https://github.com/xedeveloper/sparkrook.git
+  sparkrook: ^1.0.2
 ```
 
 ### Usage
