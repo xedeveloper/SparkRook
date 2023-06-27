@@ -33,6 +33,7 @@ class SparkRookWidget<T, P> extends StatefulWidget {
     this.data,
     this.extra,
     this.headers,
+    this.dioClient,
   });
 
   /// [builder] takes AsyncSparkBuilder which returns a widget to handle
@@ -72,6 +73,11 @@ class SparkRookWidget<T, P> extends StatefulWidget {
   /// Note: Specify the full url in the paramter
   final String url;
 
+  /// To allow injection of custom dio client to [SparkRookWidget]
+  /// If [dioClient] is not provided then library will switch to
+  /// default Dio client
+  final Dio? dioClient;
+
   @override
   State<SparkRookWidget<T, P>> createState() => _SparkRookWidgetState<T, P>();
 }
@@ -83,7 +89,7 @@ class _SparkRookWidgetState<T, P> extends State<SparkRookWidget<T, P>> {
     _rookHandler.initiateHttpRequest<P>(
       method: widget.method,
       url: widget.url,
-      dio: _dio,
+      dio: widget.dioClient ?? _dio,
       queryParameters: widget.queryParameters,
       extra: widget.extra,
       headers: widget.headers,
